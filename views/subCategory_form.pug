@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  .container
+    h1.page-title #{title}
+
+    form(method='post')
+      .form-group
+        label(for='categoryId') Select a Category:
+        select#categoryName.form-control(name="categoryId" required)
+          if !selectedCategory
+            option(value="" disabled selected) -- Please Select a Category --
+            each category in categories
+              option(value=category._id) #{category.name}
+          else 
+            each category in categories
+              if category.name === selectedCategory
+                option(value=category._id selected) #{category.name}
+              else
+                option(value=category._id) #{category.name}
+
+      .form-group
+        label(for='name') SubCategory:
+        input#name.form-control(type='text', placeholder='Clothing, Electronic etc', name='name', required value=(subCategory ? subCategory.name : ''))
+
+      .form-group
+        label(for='description') Description:
+        textarea#description.form-control(type='text', placeholder='Description', name='description' rows='10') #{subCategory ? subCategory.description : ''}
+
+      button.btn.btn-primary(type='submit') Submit
+
+    if errors
+      .alert.alert-danger.mt-3
+        ul
+          each error in errors
+            li != error.msg

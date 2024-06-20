@@ -1,0 +1,11 @@
+extends layout
+
+block content
+
+  h1.page-title #{title}: #{item.name}
+  p Do you really want to delete this Item?
+  form(method='POST')
+    div.form-group
+    input#itemId.form-control(type='hidden', name='itemId', value=item._id )
+
+    button.btn.btn-danger(type='submit') Delete

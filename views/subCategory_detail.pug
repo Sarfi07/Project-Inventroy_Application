@@ -1,0 +1,25 @@
+extends layout
+
+block content
+
+  h1.page-title #{subCategory.name}
+  p #[strong Category: ] #{category.name}
+  p=subCategory.description
+  hr
+  p
+    a.btn.btn-warning(href=subCategory.url+'/update') Update subCategory
+  p 
+    a.btn.btn-danger(href=subCategory.url+'/delete') Delete subCategory
+  hr
+
+  div(style='margin-left:20px;margin-top:20px')
+
+    h2(style='font-size: 1.5rem;') Items
+    if items.length
+      dl
+        each item in items
+          dt
+            a(href=item.url) #{item.name}
+          dd #{item.description}
+    else
+      p This subCategory has no items.

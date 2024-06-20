@@ -1,0 +1,34 @@
+extends layout
+
+block content
+    .container.mt-4
+        .row
+            .col-md-8.offset-md-2
+                .card
+                    .card-body
+                        h1.page-title #{item.name}
+                        hr
+                        .text-end.mb-3
+                            a.btn.btn-warning(href=item.url+'/update') Update Item
+                            hr
+                            a.btn.btn-danger(href=item.url+'/delete') Delete Item
+                        hr
+                        if item.imageUrl
+                            .text-center.mb-3
+                                img(src=item.imageUrl alt=item.name class="img-fluid rounded" style="max-width: 50%")
+                        dl.row
+                            dt.col-sm-3 Category:
+                            dd.col-sm-9 #{item.category.name}
+                            
+                            dt.col-sm-3 Sub Category:
+                            dd.col-sm-9 #{item.subCategory.name}
+                            
+                            dt.col-sm-3 Size:
+                            dd.col-sm-9 #{item.sizesAvailable.size}
+                            
+                            dt.col-sm-3 Quantity:
+                            dd.col-sm-9 #{item.sizesAvailable.quantity}
+                        
+                        p.mt-3 #{item.description}
+                        .text-center.mt-4
+                            button.btn.btn-success Add to Cart

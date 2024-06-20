@@ -1,0 +1,9 @@
+extends layout 
+
+block content 
+    h1.page-title #{title} 
+
+    ul
+        each val in category_list
+            li 
+                a(href=val.url) #{val.name}

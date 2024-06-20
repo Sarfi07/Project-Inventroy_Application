@@ -1,0 +1,110 @@
+/* Define your colors */
+:root {
+  --primary-color: #1a4879; /* Blue */
+  --secondary-color: #6c757d; /* Gray */
+  --accent-color: #28a745; /* Green */
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: "Arial", sans-serif; /* Update with your preferred font */
+  background-color: #f8f9fa; /* Light background color */
+  color: #343a40; /* Dark text color */
+  padding-top: 1rem;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-fluid {
+  flex: 1;
+}
+
+.sidebar {
+  padding-top: 1rem;
+
+  .nav-link {
+    color: var(--primary-color);
+  }
+  .nav-link:hover {
+    color: var(--secondary-color);
+  }
+}
+
+.content-area {
+  background-color: #ffffff; /* White background for the content area */
+  padding: 2rem; /* Adjust padding for the content area */
+  margin-top: 1rem; /* Adjust top margin */
+  border-radius: 0.5rem; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for depth */
+}
+
+footer.footer {
+  position: relative;
+  width: 100%;
+  bottom: 0;
+  background-color: var(
+    --secondary-color
+  ); /* Use secondary color for footer background */
+  color: #ffffff; /* Light text color for footer */
+  padding: 1rem;
+}
+
+/* Custom styles for the page title */
+.page-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--primary-color); /* Primary color for title */
+  text-align: center;
+  padding: 1rem 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--primary-color); /* Border color same as primary color */
+}
+
+.page-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: var(--accent-color); /* Accent color for decorative line */
+  margin: 1rem auto 0;
+  border-radius: 2px;
+}
+
+/* Custom styles for form labels */
+.form-group label {
+  font-weight: bold;
+  color: var(--primary-color); /* Primary color for labels */
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input.form-control,
+.form-group select.form-control,
+textarea.form-control {
+  border: 1px solid var(--secondary-color); /* Secondary color for borders */
+  border-radius: 0.25rem;
+}
+
+.form-group input.form-control:focus,
+.form-group select.form-control:focus,
+.nav-link:focus {
+  border-color: var(--primary-color); /* Primary color when focused */
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Primary color shadow on focus */
+}
+
+/* Button styles */
+.btn-primary {
+  background-color: var(--primary-color); /* Primary color for buttons */
+  border-color: var(--primary-color); /* Primary color for button borders */
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-color); /* Accent color on button hover */
+  border-color: var(--accent-color); /* Accent color on button hover */
+}

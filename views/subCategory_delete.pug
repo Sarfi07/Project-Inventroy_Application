@@ -1,0 +1,27 @@
+extends layout
+
+block content
+
+  h1.page-title #{title}: #{subCategory.name}
+
+  if items.length
+
+  if items.length
+    p #[strong Delete the following items before attempting to delete this subCategory.]
+    div(style='margin-left:20px;margin-top:20px')
+        h4 Items 
+        dl 
+          each item in items 
+            dt 
+              a(href=item.url) #{item.name}
+            dd #{item.description}
+    hr
+
+  else
+    p Do you really want to delete this Sub Category?
+
+    form(method='POST')
+      div.form-group
+        input#subCategoryId.form-control(type='hidden', name='subCategoryId', value=subCategory._id )
+
+      button.btn.btn-danger(type='submit') Delete

@@ -1,0 +1,24 @@
+extends layout
+
+block content
+
+  h1.page-title #{category.name}
+  p=category.description
+  hr
+  p
+    a.btn.btn-warning(href=category.url+'/update') Update category
+  p 
+    a.btn.btn-danger(href=category.url+'/delete') Delete category
+  hr
+
+  div(style='margin-left:20px;margin-top:20px')
+
+    h2(style='font-size: 1.5rem;') Subcategories
+    if subCategories.length
+      dl
+        each subCategory in subCategories
+          dt
+            a(href=subCategory.url) #{subCategory.name}
+          dd #{subCategory.description}
+    else
+      p This category has no subCategories.
