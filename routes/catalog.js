@@ -33,32 +33,32 @@ router.get("/category/:id/delete", category_controller.category_delete_get);
 router.post("/category/:id/delete", category_controller.category_delete_post);
 
 router.get(
-  "/sub_category/create",
+  "/subCategory/create",
   subCategory_controller.subCategory_create_get
 );
 router.post(
-  "/sub_category/create",
+  "/subCategory/create",
   subCategory_controller.subCategory_create_post
 );
 
-router.get("/sub_category/:id", subCategory_controller.subCategory_detail);
+router.get("/subCategory/:id", subCategory_controller.subCategory_detail);
 
 router.get(
-  "/sub_category/:id/update",
+  "/subCategory/:id/update",
   subCategory_controller.subCategory_update_get
 );
 router.post(
-  "/sub_category/:id/update",
+  "/subCategory/:id/update",
   subCategory_controller.subCategory_update_post
 );
 
 router.get(
-  "/sub_category/:id/delete",
+  "/subCategory/:id/delete",
   subCategory_controller.subCategory_delete_get
 );
 
 router.post(
-  "/sub_category/:id/delete",
+  "/subCategory/:id/delete",
   subCategory_controller.subCategory_delete_post
 );
 

@@ -11,8 +11,8 @@ block content
           option(value="" disabled selected) -- Please Select a Category --
         each category in categories 
           option(
-            value=category._id
-            selected=(selectedCategory && selectedCategory._id === category._id)
+            value=category.id
+            selected=(selectedCategory && selectedCategory.id === category.id)
           ) #{category.name}
 
 
@@ -23,8 +23,8 @@ block content
           option(value="" disabled selected) -- Please Select a Subcategory --
           each subCategory in subCategories 
             option(
-              value=subCategory._id
-              selected=(selectedSubCategory && selectedSubCategory._id.toString() === subCategory._id.toString())
+              value=subCategory.id
+              selected=(selectedSubCategory && selectedSubCategory.id === subCategory.id)
             ) #{subCategory.name}
         else 
           option(value="" disabled selected) -- Please Select a Subcategory --
@@ -40,12 +40,16 @@ block content
       input#description.form-control(type='text', placeholder='Description', name='description', required value=(undefined===item ? '': item.description))
 
     .form-group 
+      label(for='price') Price:
+      input#size.form-control(type='number', placeholder='Price', name='price', value=(undefined === item ? '' : item.price))
+
+    .form-group 
       label(for='size') Size:
-      input#size.form-control(type='text', placeholder='S or M or L etc', name='size', value=(undefined === item ? '' : item.sizesAvailable.size))
+      input#size.form-control(type='text', placeholder='S or M or L etc', name='size', value=(undefined === item ? '' : item.size))
 
     .form-group 
       label(for='quantity') Quantity:
-      input#quantity.form-control(type='number', placeholder='10 or 20 etc', name='quantity', value=(undefined === item ? '' : item.sizesAvailable.quantity))
+      input#quantity.form-control(type='number', placeholder='10 or 20 etc', name='quantity', value=(undefined === item ? '' : item.quantity))
 
     .form-group   
       label(for='file') Image: 
@@ -71,7 +75,7 @@ block content
           method: 'GET',
           success: function(data) {
             data.subCategories.forEach(function(subcat) {
-              subcatOptions += '<option value="' + subcat._id + '">' + subcat.name + '</option>';
+              subcatOptions += '<option value="' + subcat.id + '">' + subcat.name + '</option>';
             });
             $('#subcategoryName').html(subcatOptions);
           }
