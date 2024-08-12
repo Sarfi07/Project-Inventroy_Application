@@ -167,7 +167,11 @@ exports.subCategory_delete_post = asyncHandler(async (req, res, next) => {
   }
 
   try {
-    await pool.query("DELETE FROM subCategory where id=($1)", [req.params.id]);
+    if (req.body.secretKey === process.env.SECRET_KEY) {
+      await pool.query("DELETE FROM subCategory where id=($1)", [
+        req.params.id,
+      ]);
+    }
     res.render("category_detail", {
       title: "Category Detail",
       category: category.rows[0],

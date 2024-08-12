@@ -6,6 +6,10 @@ block content
   p Do you really want to delete this Item?
   form(method='POST')
     div.form-group
-    input#itemId.form-control(type='hidden', name='itemId', value=item._id )
+      input#itemId.form-control(type='hidden', name='itemId', value=item._id )
+
+
+      label(for='secretKey') Enter Secret Key:
+      input#secretKey.form-control(type='text', name='secretKey')
 
     button.btn.btn-danger(type='submit') Delete
