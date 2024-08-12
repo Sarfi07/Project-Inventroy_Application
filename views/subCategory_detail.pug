@@ -7,9 +7,9 @@ block content
   p=subCategory.description
   hr
   p
-    a.btn.btn-warning(href=subCategory.url+'/update') Update subCategory
+    a.btn.btn-warning(href= '/catalog/subCategory/' + subCategory.id+'/update') Update subCategory
   p 
-    a.btn.btn-danger(href=subCategory.url+'/delete') Delete subCategory
+    a.btn.btn-danger(href='/catalog/subCategory/' + subCategory.id+'/delete') Delete subCategory
   hr
 
   div(style='margin-left:20px;margin-top:20px')
@@ -19,7 +19,7 @@ block content
       dl
         each item in items
           dt
-            a(href=item.url) #{item.name}
+            a(href='/catalog/item/' + item.id) #{item.name}
           dd #{item.description}
     else
       p This subCategory has no items.

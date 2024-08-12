@@ -11,13 +11,13 @@ block content
           if !selectedCategory
             option(value="" disabled selected) -- Please Select a Category --
             each category in categories
-              option(value=category._id) #{category.name}
+              option(value=category.id) #{category.name}
           else 
             each category in categories
               if category.name === selectedCategory
-                option(value=category._id selected) #{category.name}
+                option(value=category.id selected) #{category.name}
               else
-                option(value=category._id) #{category.name}
+                option(value=category.id) #{category.name}
 
       .form-group
         label(for='name') SubCategory:

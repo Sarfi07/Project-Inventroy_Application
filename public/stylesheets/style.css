@@ -108,3 +108,8 @@ textarea.form-control {
   background-color: var(--accent-color); /* Accent color on button hover */
   border-color: var(--accent-color); /* Accent color on button hover */
 }
+
+.font-extrabold {
+  font-weight: 900;
+  font-size: 1.5rem;
+}
