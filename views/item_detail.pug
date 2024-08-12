@@ -13,9 +13,9 @@ block content
                             hr
                             a.btn.btn-danger(href='/catalog/item/'+ item.id +'/delete') Delete Item
                         hr
-                        if item.imageUrl
+                        if item.imgurl
                             .text-center.mb-3
-                                img(src=item.imageUrl alt=item.name class="img-fluid rounded" style="max-width: 50%")
+                                img(src=item.imgurl alt=item.name class="img-fluid rounded" style="max-width: 50%")
                         dl.row
                             dt.col-sm-3 Category:
                             dd.col-sm-9 #{item.category_name}

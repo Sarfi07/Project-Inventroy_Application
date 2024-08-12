@@ -58,8 +58,7 @@ VALUES
 async function main() {
   console.log("seeding...");
   const client = new Client({
-    connectionString:
-      "postgresql://sarfi07:seraj2005@localhost:5432/project_inventory_application",
+    connectionString: process.env.DB_CONNECTION_STRING,
   });
 
   await client.connect();

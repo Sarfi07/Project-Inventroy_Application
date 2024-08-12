@@ -27,8 +27,6 @@ exports.item_detail = asyncHandler(async (req, res, next) => {
     "SELECT item.*, category.name AS category_name, subCategory.name AS sub_category_name FROM item INNER JOIN category ON item.category_id=category.id INNER JOIN subCategory ON item.subCategory_id=subCategory.id WHERE item.id=($1);",
     [req.params.id]
   );
-
-  console.log(item.rows[0]);
   res.render("item_detail", {
     item: item.rows[0],
   });
@@ -52,18 +50,19 @@ exports.item_create_post = [
     const errors = validationResult(req);
     const file = req.file;
     let imgUrl;
-    if (file) {
-      const stream = cloudinary.uploader.upload_stream(
-        { resource_type: "image" },
-        async (error, result) => {
-          if (error) {
-            return next(error);
-          }
-          imgUrl = result.secure_url;
-        }
-      );
-
-      stream.end(file.buffer);
+    try {
+      imgUrl = await new Promise((resolve, reject) => {
+        cloudinary.uploader
+          .upload_stream({ resource_type: "image" }, (error, result) => {
+            if (error) reject(error);
+            else {
+              resolve(result.secure_url);
+            }
+          })
+          .end(file.buffer);
+      });
+    } catch (error) {
+      return next(error);
     }
 
     // const categories = await Category.find().sort({ name: 1 }).exec();
@@ -88,14 +87,6 @@ exports.item_create_post = [
         selectedCategory: req.body.categoryId,
       });
     } else {
-      console.log(
-        req.body.name,
-        req.body.description,
-        req.body.categoryId,
-        req.body.subCategoryId,
-        req.body.size,
-        req.body.quantity
-      );
       try {
         const newItem = await pool.query(
           `INSERT INTO item (name, description, category_id, subCategory_id, size, quantity, price, imgUrl) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id`,
@@ -167,20 +158,32 @@ exports.item_update_post = [
     const file = req.file;
     let imgUrl;
     if (file) {
-      const stream = cloudinary.uploader.upload_stream(
-        { resource_type: "image" },
-        async (error, result) => {
-          if (error) {
-            return next(error);
-          }
-          imgUrl = result.secure_url;
-        }
-      );
+      // const stream = cloudinary.uploader.upload_stream(
+      //   { resource_type: "image" },
+      //   async (error, result) => {
+      //     if (error) {
+      //       return next(error);
+      //     }
+      //     imgUrl = result.secure_url;
+      //   }
+      // );
 
-      stream.end(file.buffer);
+      // stream.end(file.buffer);
+      try {
+        imgUrl = await new Promise((resolve, reject) => {
+          cloudinary.uploader
+            .upload_stream({ resource_type: "image" }, (error, result) => {
+              if (error) reject(error);
+              else {
+                resolve(result.secure_url);
+              }
+            })
+            .end(file.buffer);
+        });
+      } catch (error) {
+        return next(error);
+      }
     }
-
-    // const categories = await Category.find().sort({ name: 1 }).exec();
 
     const item = {
       name: req.body.name,
@@ -202,14 +205,6 @@ exports.item_update_post = [
         selectedCategory: req.body.categoryId,
       });
     } else {
-      console.log(
-        req.body.name,
-        req.body.description,
-        req.body.categoryId,
-        req.body.subCategoryId,
-        req.body.size,
-        req.body.quantity
-      );
       try {
         await pool.query(
           `UPDATE item 
@@ -236,7 +231,6 @@ exports.item_update_post = [
             req.params.id,
           ]
         );
-
         res.redirect("/catalog/item/" + req.params.id);
       } catch (err) {
         return next(err);
@@ -263,7 +257,6 @@ exports.item_delete_post = asyncHandler(async (req, res, next) => {
     req.params.id,
   ]);
   const subCategory_id = item.rows[0].subcategory_id;
-  console.log(subCategory_id);
 
   if (item === null) {
     const err = new Error("Item not found");
