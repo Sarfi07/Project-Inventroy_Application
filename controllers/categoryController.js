@@ -246,7 +246,9 @@ exports.category_delete_post = asyncHandler(async (req, res, next) => {
     return;
   } else {
     // await Category.findByIdAndDelete(req.params.id).exec();
-    await pool.query(`DELETE FROM category where id=${req.params.id}`);
+    if (req.body.secretKey === process.env.SECRET_KEY) {
+      await pool.query(`DELETE FROM category where id=${req.params.id}`);
+    }
     res.redirect("/catalog/categories");
   }
 });

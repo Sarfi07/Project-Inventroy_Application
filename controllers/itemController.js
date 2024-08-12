@@ -265,8 +265,9 @@ exports.item_delete_post = asyncHandler(async (req, res, next) => {
   }
 
   try {
-    // await Item.findByIdAndDelete(req.params.id).exec();
-    await pool.query("DELETE from item where id=($1)", [req.params.id]);
+    if (req.body.secretKey === process.env.SECRET_KEY) {
+      await pool.query("DELETE from item where id=($1)", [req.params.id]);
+    }
     res.redirect(`/catalog/subCategory/${subCategory_id}`);
   } catch (err) {
     return next(err);

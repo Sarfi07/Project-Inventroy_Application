@@ -23,5 +23,9 @@ block content
     form(method='POST')
       div.form-group
         input#subCategoryId.form-control(type='hidden', name='subCategoryId', value=subCategory._id )
+      
+
+        label(for='secretKey') Enter Secret Key:
+        input#secretKey.form-control(type='text', name='secretKey')
 
       button.btn.btn-danger(type='submit') Delete
