@@ -50,19 +50,21 @@ exports.item_create_post = [
     const errors = validationResult(req);
     const file = req.file;
     let imgUrl;
-    try {
-      imgUrl = await new Promise((resolve, reject) => {
-        cloudinary.uploader
-          .upload_stream({ resource_type: "image" }, (error, result) => {
-            if (error) reject(error);
-            else {
-              resolve(result.secure_url);
-            }
-          })
-          .end(file.buffer);
-      });
-    } catch (error) {
-      return next(error);
+    if (file) {
+      try {
+        imgUrl = await new Promise((resolve, reject) => {
+          cloudinary.uploader
+            .upload_stream({ resource_type: "image" }, (error, result) => {
+              if (error) reject(error);
+              else {
+                resolve(result.secure_url);
+              }
+            })
+            .end(file.buffer);
+        });
+      } catch (error) {
+        return next(error);
+      }
     }
 
     // const categories = await Category.find().sort({ name: 1 }).exec();
@@ -158,17 +160,6 @@ exports.item_update_post = [
     const file = req.file;
     let imgUrl;
     if (file) {
-      // const stream = cloudinary.uploader.upload_stream(
-      //   { resource_type: "image" },
-      //   async (error, result) => {
-      //     if (error) {
-      //       return next(error);
-      //     }
-      //     imgUrl = result.secure_url;
-      //   }
-      // );
-
-      // stream.end(file.buffer);
       try {
         imgUrl = await new Promise((resolve, reject) => {
           cloudinary.uploader
